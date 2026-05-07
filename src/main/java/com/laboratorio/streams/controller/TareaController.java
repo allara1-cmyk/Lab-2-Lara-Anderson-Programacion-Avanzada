@@ -31,21 +31,18 @@ public class TareaController {
         Page<Tarea> tareas = tareaService.listarTareas(estado, PageRequest.of(page, size));
         return new ResponseEntity<>(tareas, HttpStatus.OK); // 200
     }
-
     // GET /api/tareas/resumen (Conteo total de tareas agrupadas por estado)
     @GetMapping("/resumen")
     public ResponseEntity<Map<String, Long>> obtenerResumen() {
         Map<String, Long> resumen = tareaService.obtenerResumenPorEstado();
         return new ResponseEntity<>(resumen, HttpStatus.OK); // 200
     }
-
     // GET /api/tareas/{id} (Obtener por ID)
     @GetMapping("/{id}")
     public ResponseEntity<Tarea> obtenerPorId(@PathVariable Long id) {
         Tarea tarea = tareaService.obtenerPorId(id);
         return new ResponseEntity<>(tarea, HttpStatus.OK); // 200
     }
-
     // POST /api/tareas (Crear)
     @PostMapping
     public ResponseEntity<Tarea> crearTarea(@Valid @RequestBody TareaDTO tareaDTO) {
